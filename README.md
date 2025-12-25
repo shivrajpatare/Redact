@@ -6,92 +6,95 @@
 ![Security](https://img.shields.io/badge/Security-Privacy%20First-red)
 
 ## 🛑 The Problem
-You're deep in your zone, building an amazing app. You temporarily paste an AWS key or OpenAI API key into your code for testing. You type `git commit` and `git push`, forgetting to remove it.
+You're in the zone, building an amazing app. You temporarily paste an API key (AWS, OpenAI, Stripe) into your code for testing. You type `git commit` and `git push`, forgetting to remove it.
 
-**Boom.** Your key is now public. Hackers find it in seconds. You wake up to a $5,000 bill.
+**Boom.** Your key is now public. Hackers find it in seconds. This can lead to massive bills or security breaches.
 
 ## ✅ The Solution: Redact
-**Redact** is your local guard dog. It lives in your project and sniffs your code *before* you commit. If it sees a secret, it **blocks the commit** and highlights the exact line.
+**Redact** is your local security guard. It lives in your project and scans your code *before* you commit. If it sees a secret, it **blocks the commit** and tells you exactly where the problem is.
 
 - **🛡️ 100% Offline**: No data ever leaves your computer.
-- **⚡ Lightning Fast**: Scans only changed files during git commits.
-- **🧠 Hybrid Detection**: Uses Regex for known keys and Entropy Analysis for unknown passwords.
+- **⚡ Super Fast**: Scans only changed lines during commits.
+- **🧠 Hybrid Detection**: Smart enough to catch both known key formats and unknown random passwords.
 
 ---
 
-## 🚀 Quick Start (Walkthrough)
-
-Let's see Redact in action. follow these 3 steps to verify it works right now.
+## 🏎️ 1. Try it out (Quick Start)
+*Do this if you just downloaded this repo and want to see Redact in action.*
 
 ### 1. Installation
-Clone the repo and install dependencies:
 ```bash
 git clone https://github.com/shivrajpatare/Redact.git
 cd Redact
 pip install -r requirements.txt
 ```
 
-### 2. Manual Scan (The Demo)
-We have a `tests/demo` folder with fake secrets. Let's scan it:
+### 2. Run a Manual Scan
+We've included a demo folder with fake secrets. Check it:
 ```bash
 python run.py scan --path tests/demo
 ```
-**Expected Result:**
-You should see Redact flag the fake AWS, Stripe, and OpenAI keys with a **[HIGH]** severity warning.
+> **What happens?** Redact will find the fake keys in `tests/demo/unsafe_code.py` and print a report.
 
-### 3. Git Protection (The Hook)
-Install the pre-commit hook into this repo:
+### 3. Test the "Auto-Block"
+Activate the guard in this folder:
 ```bash
 python run.py install-hook
 ```
-Now, try to commit the unsafe demo file:
+Now try to commit the unsafe file:
 ```bash
 git add tests/demo/unsafe_code.py
 git commit -m "Testing Redact"
 ```
-**Expected Result:**
-Your terminal will show `❌ Secrets detected! Commit blocked.`. Redact just saved you from a leak!
+> **What happens?** Git will trigger Redact. Redact will see the keys and **STOP** the commit.
 
 ---
 
-## 📖 How to Protect YOUR Project
+## 🛡️ 2. Protect YOUR Project
+*Do this to add Redact protection to your own website, app, or bot.*
 
-Do you want to shield your own app/website? It takes 60 seconds.
+To protect another project (e.g., `my-cool-app`), follow these steps:
 
-### Step-by-Step Integration:
-1.  **Navigate** to your project's root folder.
-2.  **Download** Redact into a subfolder:
-    ```bash
-    mkdir tools
-    git clone https://github.com/shivrajpatare/Redact.git tools/Redact
-    ```
-3.  **Install** dependencies: `pip install -r tools/Redact/requirements.txt`
-4.  **Activate**: Run the installer:
-    ```bash
-    python tools/Redact/run.py install-hook
-    ```
+### Step 1: Clone Redact into your project
+It's common to keep tools in a `tools/` folder:
+```bash
+cd my-cool-app
+mkdir tools
+git clone https://github.com/shivrajpatare/Redact.git tools/Redact
+```
 
-**You are now protected.** Any future `git commit` in your project will be automatically scanned by Redact.
+### Step 2: Install dependencies
+```bash
+pip install -r tools/Redact/requirements.txt
+```
+
+### Step 3: Activate the Guard
+**Important:** Run this command from the **ROOT** of your project:
+```bash
+python tools/Redact/run.py install-hook
+```
+
+**You are now safe!** Every time you `git commit` in your app, Redact will automatically check your work.
 
 ---
 
 ## 🛠️ Features
 - **Regex Detection**: AWS, Stripe, OpenAI, GitHub, Google, Slack, and Private Keys.
-- **Entropy Analysis**: Smart heuristics to find high-randomness strings (passwords/tokens).
-- **Context Awareness**: Flags strings assigned to variables like `API_KEY` or `SECRET`.
-- **Masked Output**: Displays `AKIA****************` to keep your logs clean.
+- **Entropy Analysis**: Catch random passwords even if they don't have a fixed format.
+- **Context Awareness**: Flags strings assigned to variables like `API_KEY` or `PASSWORD`.
+- **Masked Output**: Shows `AKIA****************` so your logs stay secret too.
 
 ## 📂 Project Structure
 ```text
 Redact/
 ├── src/
-│   ├── scanner.py    # Recursive file walker (respects .gitignore)
-│   ├── detector.py   # Hybrid engine (Regex + Entropy)
-│   ├── patterns.py   # Database of secret patterns
-│   └── cli.py        # Interactive CLI
-├── run.py            # Entry point
-└── requirements.txt  # Dependencies
+│   ├── scanner.py    # File walker (respects .gitignore)
+│   ├── detector.py   # Detection engine (Regex + Entropy)
+│   ├── patterns.py   # Provider patterns
+│   └── cli.py        # CLI Interface logic
+├── run.py            # Main entry point
+└── requirements.txt  # Project dependencies
 ```
 
 ## 🛡️ License
-MIT License. Created by [Shivraj Patare](https://github.com/shivrajpatare). Feel free to use in any project!
+MIT License. Created by [Shivraj Patare](https://github.com/shivrajpatare). Stop the leaks!
