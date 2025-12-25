@@ -1,10 +1,10 @@
-# 🔒 Secret Scanner CLI
+# 🔒 Redact
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Security](https://img.shields.io/badge/Security-Privacy%20First-red)
 
-A privacy-first, offline DevSecOps tool to prevent secret leaks in your code.
+A privacy-first pre-publish secret scanner for developers.
 Designed for developers who want to stop accidental API key exposures before they happen.
 
 ## 🚀 Why this tool?
@@ -22,8 +22,8 @@ Developers often accidentally commit keys (AWS, OpenAI, Stripe) to public reposi
 ## 🛠️ Installation
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/secret-scanner.git
-cd secret-scanner
+git clone https://github.com/shivrajpatare/Redact.git
+cd Redact
 pip install -r requirements.txt
 ```
 

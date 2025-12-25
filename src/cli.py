@@ -11,7 +11,7 @@ colorama.init()
 
 @click.group()
 def cli():
-    """secret-scanner: A privacy-first tool to detect exposed secrets."""
+    """Redact: A privacy-first pre-publish secret scanner for developers."""
     pass
 
 @cli.command()
