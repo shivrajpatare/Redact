@@ -6,13 +6,13 @@ def connect_db():
     return db_password
 
 def send_request():
-    # TEST: AWS Key Pattern (Modified to pass GitHub Push Protection)
-    aws_key_id = "AKIA_FAKE_KEY_FOR_DEMO_12345"
+    # TEST: AWS Key Pattern (Fake but matches Regex: AKIA + 16 alphanumeric)
+    aws_key_id = "AKIAFAKEKEYEXAMPLE12"
     
-    # TEST: Stripe Pattern
-    stripe_key = "sk_live_FAKE_KEY_FOR_DEMO_12345"
+    # TEST: Stripe Pattern (Fake but matches Regex: sk_live_ + 24 alphanumeric)
+    stripe_key = "sk_live_fakekeyexample12345678"
     
-    # TEST: OpenAI Pattern
-    openai_key = "sk-FAKE-KEY-FOR-DEMO-12345678901234567890" 
+    # TEST: OpenAI Pattern (Fake but matches Regex: sk- + 32 alphanumeric)
+    openai_key = "sk-fakekeyexample1234567890123456789012" 
 
     print("Connecting...")
