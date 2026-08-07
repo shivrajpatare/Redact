@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "redact-scanner"
+version = "1.0.0"
+description = "A privacy-first, 100% offline secret scanner. Catches API keys, tokens, and credentials before they hit git."
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "Shivraj Patare"}]
+requires-python = ">=3.9"
+keywords = ["security", "secrets", "git-hook", "pre-commit", "credential-scanning", "cli"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+]
+dependencies = [
+    "click>=8.1.0",
+    "pathspec>=0.11.0",
+    "colorama>=0.4.6",
+]
+
+[project.urls]
+Homepage = "https://github.com/shivrajpatare/Redact"
+Repository = "https://github.com/shivrajpatare/Redact"
+Issues = "https://github.com/shivrajpatare/Redact/issues"
+
+[project.scripts]
+redact = "redact.cli:cli"
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4", "pytest-cov>=4.1"]
+
+[tool.setuptools]
+packages = ["redact"]
