@@ -33,7 +33,7 @@ PATTERNS = [
     },
     {
         "name": "Google API Key",
-        "regex": re.compile(r"AIza[0-9A-Za-z\\-_]{35}"),
+        "regex": re.compile(r"AIza[0-9A-Za-z_-]{35}"),
         "severity": "HIGH",
         "confidence": "HIGH"
     },

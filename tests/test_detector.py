@@ -46,3 +46,12 @@ def test_secret_is_masked_in_finding():
     assert finding.secret_masked.startswith("AK")
     assert "*" in finding.secret_masked
     assert "AKIAFAKEKEYEXAMPLE12" not in finding.secret_masked
+
+
+def test_detects_google_api_key_by_pattern():
+    detector = Detector()
+    # AIza + exactly 35 alphanumeric/underscore/hyphen characters
+    line = 'google_key = "AIzaSyFAKEKEY1234567890abcdefghijklmnop"\n'
+    findings = detector.check_line("fake.py", 1, line)
+    assert any(f.severity == Severity.HIGH and "Google" in f.description for f in findings)
+
